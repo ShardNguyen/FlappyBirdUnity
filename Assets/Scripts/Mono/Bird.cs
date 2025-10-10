@@ -1,4 +1,6 @@
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class Bird : MonoBehaviour
@@ -7,6 +9,11 @@ public class Bird : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private float _jumpForce = 7f;
 
+    public void Reset()
+    {
+        this.transform.position = Vector3.zero;
+    }
+    
     private void OnEnable()
     {
         transform.position = Vector3.zero;

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,7 +6,11 @@ public class GameManager : MonoBehaviour
     // Game Manager must be a singleton
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] public Bird bird;
+    [SerializeField] public TextMeshProUGUI scoreText;
+
     public int Score { get; private set; }
+
 
     private void Awake()
     {
@@ -19,14 +24,28 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Pause()
+    {
+        Time.timeScale = 0f;
+        bird.enabled = false;
+    }
+
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        Pause();
+    }
+
+    public void Reset()
+    {
+        bird.Reset();
+        Score = 0;
+        scoreText.SetText(Score.ToString());
     }
 
     public void AddScore()
     {
         ++Score;
-        Debug.Log(Score);
+        scoreText.SetText(Score.ToString());
     }
+
 }
